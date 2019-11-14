@@ -4,7 +4,7 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <h1>ParkPass</h1>
+      <h1>ParkPass App</h1>
     </div>
   );
 }
