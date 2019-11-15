@@ -5,7 +5,7 @@ export default function Nav() {
   return (
     <div>
       <nav>
-        <Link to="/">Home</Link>
+        <Link to="/">Home</Link><br></br>
         <Link to="/account">Account</Link>
       </nav>
     </div>
