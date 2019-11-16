@@ -3,7 +3,6 @@ import TextField from "@material-ui/core/TextField";
 import Axios from "axios";
 import ParkCard from "./Parks/ParkCard";
 
-
 export default function SearchForm() {
 
   const [ data, setData ] = useState([]);
@@ -37,7 +36,7 @@ useEffect(() => {
 
         {data.map((park => {
         return (
-        <ParkCard 
+        <ParkCard
         key={park.id} 
         name={park.name} 
         description={park.description} 

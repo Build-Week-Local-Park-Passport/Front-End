@@ -13,7 +13,7 @@ function App() {
       <h1>ParkPass App</h1>
       <Search />
 
-      <Route exact path="/" component={ParkList} />
+      {/* <Route exact path="/" component={ParkList} /> */}
       <Route exact path="/account" component={UserHome} />
     </div>
   );
