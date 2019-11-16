@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from '@material-ui/core/Card'
 import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -37,9 +37,9 @@ const StyledRating = withStyles({
   },
 })(Rating);
 
-export default function ParkCard( { name, location, description }) {
+export default function ParkCard( { name, location, description } ) {
   const classes = useStyles();
-  const [value, setValue] = React.useState(2);
+  const [value, setValue] = useState(2);
 
   return (
     <Card className={classes.card}>
