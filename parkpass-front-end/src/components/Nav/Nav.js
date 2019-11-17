@@ -6,6 +6,7 @@ export default function Nav() {
   const signout = e => {
     e.preventDefault()
     localStorage.removeItem('token')
+    // need to bring this up to top level to be able to push to home page after signout
   }
 
   return (

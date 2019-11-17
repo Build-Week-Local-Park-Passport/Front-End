@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
+import { ProtectedRoute } from './utils/ProtectedRoute';
 import ParkList from './components/Parks/ParkList';
 import UserHome from './components/User/UserHome';
-import './App.css';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import './App.css';
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
       <Route exact path="/signup" component={Signup} />
 
       <Route exact path="/" component={ParkList} />
-      <Route exact path="/account" component={UserHome} />
+      <ProtectedRoute exact path="/account" component={UserHome} />
     </div>
   );
 }
