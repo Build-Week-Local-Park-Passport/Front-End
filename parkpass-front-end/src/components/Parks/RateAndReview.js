@@ -7,5 +7,3 @@ export default function RatePark() {
     </div>
   )
 }
-
-/* Add hover & heart ranks + textfield */
