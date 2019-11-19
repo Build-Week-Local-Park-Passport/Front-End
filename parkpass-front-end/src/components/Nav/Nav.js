@@ -1,22 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { getToken } from '../../utils/getToken'
+import { signout } from '../../utils/signout'
 
 export default function Nav() {
 
-  const signout = e => {
-    e.preventDefault()
-    localStorage.removeItem('token')
-  }
+  const signedIn = getToken()
 
   return (
     <div>
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/signup">Signup</Link>
-        <Link to="/account">Account</Link>
+        {!signedIn && <Link to="/login">Login</Link>}
+        {!signedIn && <Link to="/signup">Signup</Link>}
+        {signedIn && <Link to="/account">Account</Link>}
 
-        <button onClick={signout}>Signout</button>
+        <button onClick={e => signout(e)}>Signout</button>
       </nav>
     </div>
   )

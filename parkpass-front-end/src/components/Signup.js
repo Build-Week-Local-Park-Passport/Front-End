@@ -8,10 +8,6 @@ export default function Signup(props) {
     password: ''
   })
 
-  useEffect(() => {
-    localStorage.getItem('token') && props.history.push('/')
-  }, [])
-
   const handleChange = e => {
     setData({
       ...data,
@@ -24,7 +20,7 @@ export default function Signup(props) {
 
     axios.post('https://park-passport.herokuapp.com/api/auth/register', data)
       .then(res => {
-        // localStorage.setItem('token', res.data.token)
+        localStorage.setItem('token', res.data.token)
         console.log(res)
       })
       .catch(err => console.log(err))
