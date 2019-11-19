@@ -9,6 +9,7 @@ import ParkPage from './components/Parks/ParkPage';
 import UserHome from './components/User/UserHome';
 import Login from './components/Login';
 import Signup from './components/Signup';
+
 import './App.css';
 
 
@@ -27,6 +28,7 @@ function App() {
         <Route exact path="/" component={Search} />
         <ProtectedRoute exact path="/account" component={UserHome} />
         <Route path="/parks/:id" component={ParkPage} />
+        
     </div>
     </ParksContext.Provider>
   );
