@@ -16,8 +16,9 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 345,
     margin: "20px auto",
     boxShadow: "0 8px 40px -15px rgba(0,0,0,0.3)",
-    "borderRadius": "5px"
-  },
+    "borderRadius": "5px",
+    "textDecoration": "none"
+    },
   details: {
     marginTop: "10px",
     textAlign: "left"
@@ -39,7 +40,7 @@ const StyledRating = withStyles({
 
 export default function ParkCard( { name, location, description } ) {
   const classes = useStyles();
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState();
 
   return (
     <Card className={classes.card}>
@@ -60,7 +61,7 @@ export default function ParkCard( { name, location, description } ) {
           <Typography component="legend">Excellent</Typography>
           <StyledRating
           name="customized-color"
-          value={5}
+          value={value}
           icon={<FavoriteIcon fontSize="inherit" />}
           />
           </Box>
