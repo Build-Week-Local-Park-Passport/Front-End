@@ -10,12 +10,14 @@ export default function Nav() {
   return (
     <div>
       <nav>
+
         <Link to="/">Home</Link>
         {!signedIn && <Link to="/login">Login</Link>}
         {!signedIn && <Link to="/signup">Signup</Link>}
         {signedIn && <Link to="/account">Account</Link>}
 
         <button onClick={e => signout(e)}>Signout</button>
+
       </nav>
     </div>
   )
