@@ -5,10 +5,12 @@ import Search from './components/Search';
 import { ProtectedRoute } from './utils/ProtectedRoute';
 import { useApi } from './utils/api';
 import { ParksContext } from './contexts/ParksContext';
-import ParkList from './components/Parks/ParkList';
+import ParkPage from './components/Parks/ParkPage';
+import AddPark from './components/Parks/AddPark';
 import UserHome from './components/User/UserHome';
 import Login from './components/Login';
 import Signup from './components/Signup';
+import BottomNav from './components/Nav/BottomNav';
 import './App.css';
 
 
@@ -26,8 +28,11 @@ function App() {
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/" component={Search} />
         <ProtectedRoute exact path="/account" component={UserHome} />
+        <ProtectedRoute exact path="/addpark" component={AddPark} />
         <Route path="/parks/:id" component={ParkPage} />
-    </div>
+
+        <BottomNav />
+      </div>
     </ParksContext.Provider>
   );
 }
