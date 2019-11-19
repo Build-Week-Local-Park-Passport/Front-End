@@ -1,7 +1,9 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import { ProtectedRoute } from './utils/ProtectedRoute';
+import { useApi } from './utils/api';
+import { ParksContext } from './contexts/ParksContext';
 import ParkList from './components/Parks/ParkList';
 import UserHome from './components/User/UserHome';
 import Login from './components/Login';
@@ -10,18 +12,22 @@ import './App.css';
 
 function App() {
 
+  const [parks, error] = useApi()
+
   return (
-    <div className="App">
-      <Nav />
-      <h1>ParkPass App</h1>
+    <ParksContext.Provider value={parks}>
+      <div className="App">
+        <Nav />
+        <h1>ParkPass App</h1>
 
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={Signup} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
 
-      <Route exact path="/" component={ParkList} />
-      <ProtectedRoute exact path="/account" component={UserHome} />
-    </div>
+        <Route exact path="/" component={ParkList} />
+        <ProtectedRoute exact path="/account" component={UserHome} />
+      </div>
+    </ParksContext.Provider>
   );
 }
 
-export default App;
+export default withRouter(App);

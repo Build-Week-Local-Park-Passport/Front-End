@@ -8,10 +8,6 @@ export default function Login(props) {
     password: ''
   })
 
-  useEffect(() => {
-    localStorage.getItem('token') && props.history.push('/')
-  }, [])
-
   const handleChange = e => {
     setData({
       ...data,
