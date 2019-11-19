@@ -79,8 +79,12 @@ export default function AddPark({ values }) {
           mapPropsToValues({park, location}) {
             return {
               park: park || '',
-              location: location || '',
+              location: location || ''
             };
+          },
+          handleSubmit( values ) {
+            console.log(values);
+
           }
         })
 
