@@ -7,6 +7,7 @@ import './App.css';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import ParkPage from './components/Parks/ParkPage';
+import ParkList from './components/Parks/ParkList';
 
 function App() {
 
@@ -14,7 +15,6 @@ function App() {
     <div className="App">
       <Nav />
       <h1>ParkPass App</h1>
-      {/* <Search /> */}
 
       <Route exact path="/login" component={Login} />
       <Route exact path="/signup" component={Signup} />
