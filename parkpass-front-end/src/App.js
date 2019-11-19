@@ -1,30 +1,35 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
-import UserHome from './components/User/UserHome';
 import Search from './components/Search';
-import './App.css';
+import { ProtectedRoute } from './utils/ProtectedRoute';
+import { useApi } from './utils/api';
+import { ParksContext } from './contexts/ParksContext';
+import ParkList from './components/Parks/ParkList';
+import UserHome from './components/User/UserHome';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import ParkPage from './components/Parks/ParkPage';
-import ParkList from './components/Parks/ParkList';
+import './App.css';
+
 
 function App() {
 
+  const [parks, error] = useApi()
+
   return (
-    <div className="App">
-      <Nav />
-      <h1>ParkPass App</h1>
+    <ParksContext.Provider value={parks}>
+      <div className="App">
+        <Nav />
+        <h1>ParkPass App</h1>
 
-      <Route exact path="/login" component={Login} />
-      <Route exact path="/signup" component={Signup} />
-
-      {/* Component for "/" was ParkList before */}
-      <Route exact path="/" component={Search} />
-      <Route exact path="/account" component={UserHome} />
-      <Route path="/parks/:id" component={ParkPage} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <Route exact path="/" component={Search} />
+        <ProtectedRoute exact path="/account" component={UserHome} />
+        <Route path="/parks/:id" component={ParkPage} />
     </div>
+    </ParksContext.Provider>
   );
 }
 
-export default App;
+export default withRouter(App);
