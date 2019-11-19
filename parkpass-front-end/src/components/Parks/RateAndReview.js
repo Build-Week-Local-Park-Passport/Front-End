@@ -1,5 +1,5 @@
 import React from 'react'
-import { reviewsContext } from '../../contexts/reviewsContext'
+
 
 export default function RatePark(props) {
   return (
