@@ -109,7 +109,18 @@ export default function AddPark({ values }) {
 
     
 /* Need: redirect to login or form to add new park to parks list 
+<<<<<<< HEAD
 Form Fields: Park Name, Location. 
 Ammenities list: check-box or drop-down?
 Validation for login: redirect to sign-up/login if !
+=======
+
+Form Fields: Park Name, Location. 
+
+Ammenities list: check-box or drop-down?
+
+Validation for login: redirect to sign-up/login if !
+
+
+>>>>>>> 648e6b5da91c2e3da68fe5545b831556b7295fe6
 */
