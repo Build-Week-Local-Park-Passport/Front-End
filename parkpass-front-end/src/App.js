@@ -5,7 +5,7 @@ import Search from './components/Search';
 import { ProtectedRoute } from './utils/ProtectedRoute';
 import { useApi } from './utils/api';
 import { ParksContext } from './contexts/ParksContext';
-import ParkList from './components/Parks/ParkList';
+import ParkPage from './components/Parks/ParkPage';
 import UserHome from './components/User/UserHome';
 import Login from './components/Login';
 import Signup from './components/Signup';
