@@ -32,7 +32,7 @@ export default function RatePark(props) {
                 name='location'
                 placeholder='Location'
               />        
-               <Field 
+               <TextField 
                 type='text'
                 id='review'
                 name='review'
@@ -56,8 +56,7 @@ const FormikReviewForm = withFormik({
     };
   },
   handleSubmit(values, tools) {
-
-
+      console.log(values, tools);
   }
 
 })
