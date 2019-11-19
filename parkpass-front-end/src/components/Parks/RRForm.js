@@ -10,7 +10,7 @@ export default function RatePark(props) {
     review: ''
   });
 
- 
+ /* Add Form */
   return (
     <div className='Review'>
       <div>{review}</div>
@@ -24,26 +24,23 @@ export default function RatePark(props) {
                   type='text' 
                   id='park'
                   name='park'
-                  placeholder='park'
-                />
-
-                
-                
-                
-
-
-
-             </Form> 
-
-          }}
-        
-        
-        
-        
-        />
+                  placeholder='Park'
+                  />
+              <Field 
+                type='text'
+                id='review'
+                name='review'
+                placeholder='Review'
+              />        
+          </Form> 
+        }}
+       />
    </div>
   )
-}
+}          
+      
+        
+ 
 const FormikReviewForm = withFormik({
   mapPropsToValues({ park, review }) {
     return {
@@ -52,11 +49,18 @@ const FormikReviewForm = withFormik({
     };
   },
   handleSubmit(values, tools) {
-    
+
 
   }
 
 })
+/* Add hover & heart ranks */             
+             
+           
+                
+                
+                
+
 
 
 
@@ -64,4 +68,3 @@ const FormikReviewForm = withFormik({
 
  
 
-/* Add hover & heart ranks + textfield */
