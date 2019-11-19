@@ -10,9 +10,6 @@ import UserHome from './components/User/UserHome';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import AddPark from './components/Parks/AddPark';
-import UserHome from './components/User/UserHome';
-import Login from './components/Login';
-import Signup from './components/Signup';
 import BottomNav from './components/Nav/BottomNav';
 import './App.css';
 
@@ -35,14 +32,12 @@ function App() {
         <Route path="/parks/:id" component={ParkPage} />
 
         
-    </div>
-
-
+    
         <BottomNav />
       </div>
 
-    </ParksContext.Provider>
-  );
+  </ParksContext.Provider>
+ );
 }
 
 export default withRouter(App);
