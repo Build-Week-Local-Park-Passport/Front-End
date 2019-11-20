@@ -1,126 +1,65 @@
 import React, {useState } from 'react';
-import { withFormik, Form, Field } from 'formik';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import SendIcon from '@material-ui/icons/Send';
+import TextField from '@material-ui/core/TextField';
 
-export default function AddPark({ values }) {
-  const [park, setPark] = useState([]);
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: 'block',
+    flexWrap: 'wrap',
+    maxWidth: 345,
+    margin: "20px auto",
+  },
+  input: {
+    margin: theme.spacing(1),
+    marginTop: "20px"
+  },
+  button: {
+    margintop: "20px"
+  }
+}));
+
+const AddPark = ( props ) => {
+  const classes = useStyles();
+  const [newPark, setNewPark ] = useState({name: "", description: "", location: ""});
+
+
 
   return (
-    <div className='add-park'>
+    <div className={classes.container}>
+      <form>
+      <TextField
+          id="standard-basic"
+          className={classes.textField}
+          label="Add New Park"
+          margin="normal"
+        />
+      <TextField
+          id="standard-basic"
+          className={classes.textField}
+          label="Add Park Location"
+          margin="normal"
+        />
+      <TextField
+          id="standard-basic"
+          className={classes.textField}
+          label="Add Park Description"
+          margin="normal"
+        />
+      <br></br><br></br>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        endIcon={<SendIcon/>}
+      >
+        Send
+      </Button>
+        </form>
 
-      {/* Input Fields  */}
-
-      <Form>
-        <Field 
-          id='park'
-          name='park'
-          placeholder='Park'
-          />
-        <Field
-          id='location'
-          name='location'
-          placeholder='Location'
-          /> 
-
-    {/* Ammenities Checkboxes */}
-
-          <label className='checkbox-container'>
-            Dog Park
-            <Field
-              type='checkbox'
-              name='dog_park'
-              checked={values.dog_park}
-            />
-            <span className='checkmark' />
-            Pool
-            <Field
-              type='checkbox'
-              name='pool'
-              checked={values.pool}       
-             />
-            <span className='checkmark' />
-            Hiking
-            <Field 
-              type='checkbox'
-              name='hiking'
-              checked={values.hiking}      
-            />
-            <span className='checkmark' />
-            Waterfalls
-            <Field 
-              type='checkbox'
-              name='waterfalls'
-              checked={values.waterfalls}            
-            />
-            <span className='checkmark' />
-            Disc Golf
-            <Field 
-              type='checkbox'
-              name='disc_golf'
-              checked={values.disc_golf}           
-             />
-             <span className='checkmark' />
-             Picnic Area
-             <Field 
-              type='checkbox'
-              name='picnic_area'
-              checked={values.picnic_area}           
-             />
-             <span className='checkmark' />
-          </label>  
-         <button>Submit</button>
-        </Form> 
       </div>
-  );
-}    
-
-    {/* mPTV destructuring */}
-
-    const FormikAddPark = withFormik({
-          mapPropsToValues({park, location}) {
-            return {
-              park: park || '',
-              location: location || '',
-            };
-          }
-        })
-
-
- 
-       
- {/* Add New Park f() */}
-
-      //   const addNewPark = parks => {
-      //     const newPark = {
-      //       id: Date.now(),
-      //       park: parks.park,
-      //       location: parks.location 
-      //     };
-      //     setPark([...park, newPark]);
-      //   };    
-
-
-      //  const submitForm = event => {
-      //   event.preventDefault();
-      //   props.addNewPark(park);
-      //   setPark({ park: '', location: '' })
-      //  }
-
-
-
-    
-/* Need: redirect to login or form to add new park to parks list 
-<<<<<<< HEAD
-Form Fields: Park Name, Location. 
-Ammenities list: check-box or drop-down?
-Validation for login: redirect to sign-up/login if !
-=======
-
-Form Fields: Park Name, Location. 
-
-Ammenities list: check-box or drop-down?
-
-Validation for login: redirect to sign-up/login if !
-
-
->>>>>>> 648e6b5da91c2e3da68fe5545b831556b7295fe6
-*/
+    );
+};
+export default AddPark;

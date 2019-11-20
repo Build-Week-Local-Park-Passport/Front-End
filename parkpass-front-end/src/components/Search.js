@@ -108,6 +108,7 @@ useEffect(() => {
         name={park.name} 
         description={park.description} 
         location={park.location} 
+        review={park.review}
           />
         </Link>        
         )})

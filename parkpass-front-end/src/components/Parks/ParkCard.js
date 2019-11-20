@@ -38,9 +38,11 @@ const StyledRating = withStyles({
   },
 })(Rating);
 
-export default function ParkCard( { name, location, description } ) {
+export default function ParkCard( { name, location, description, review } ) {
   const classes = useStyles();
   const [value, setValue] = useState();
+
+
 
   return (
     <Card className={classes.card}>
@@ -61,7 +63,7 @@ export default function ParkCard( { name, location, description } ) {
           <Typography component="legend">Excellent</Typography>
           <StyledRating
           name="customized-color"
-          value={value}
+          value={5}
           icon={<FavoriteIcon fontSize="inherit" />}
           />
           </Box>
