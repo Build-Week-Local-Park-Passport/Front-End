@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TextField from "@material-ui/core/TextField";
 import Axios from "axios";
 import ParkCard from "./Parks/ParkCard";
@@ -8,6 +8,7 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
+import { AddToFavesContext } from "../contexts/AddToFavesContext";
 
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SearchForm() {
+export default function SearchForm(props) {
   const classes = useStyles();
 
   const [ data, setData ] = useState([]);
@@ -104,6 +105,7 @@ useEffect(() => {
         name={park.name} 
         description={park.description} 
         location={park.location} 
+        addToFaves={props.addToFaves}
           />
         </Link>        
         )})

@@ -6,20 +6,7 @@ import { ParksContext } from "../../contexts/ParksContext";
 export default function ParkList() {
   // TODO: Add useState to track data from useEffect
 
-  // const [park, setPark] = useState([]);
   const parks = useContext(ParksContext)
-
-  // useEffect(() => {
-  //   axios
-  //   .get('https://park-passport.herokuapp.com/api/parks')
-  //   .then((response) => {
-  //     setPark(response.data);
-  //     console.log(response);
-  //   })
-  //   .catch(error => {
-  //     console.error('Server Error', error);
-  //   });
-  // }, []);
 
   return (
     <section>
