@@ -93,21 +93,21 @@ export default function AddPark({ values }) {
        
  {/* Add New Park f() */}
 
-        const addNewPark = parks => {
-          const newPark = {
-            id: Date.now(),
-            park: parks.park,
-            location: parks.location 
-          };
-          setPark([...park, newPark]);
-        };    
+      //   const addNewPark = parks => {
+      //     const newPark = {
+      //       id: Date.now(),
+      //       park: parks.park,
+      //       location: parks.location 
+      //     };
+      //     setPark([...park, newPark]);
+      //   };    
 
 
-       const submitForm = event => {
-        event.preventDefault();
-        props.addNewPark(park);
-        setPark({ park: '', location: '' })
-       }
+      //  const submitForm = event => {
+      //   event.preventDefault();
+      //   props.addNewPark(park);
+      //   setPark({ park: '', location: '' })
+      //  }
 
 
 
