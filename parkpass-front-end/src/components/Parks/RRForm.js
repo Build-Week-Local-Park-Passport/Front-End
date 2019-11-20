@@ -16,17 +16,23 @@ export default function RatePark(props) {
       <div>{review}</div>
 
         <Formik 
-          initalValues={{ park: '', revew: ' '}}
+          initialValues={{ park: '', review: '' }}
           onsubmit={handleSubmit}
           render={props => {
              <Form>
                 <Field 
                   type='text' 
-                  id='park'
-                  name='park'
-                  placeholder='Park'
+                  id='name'
+                  name='name'
+                  placeholder='Name'
                   />
-              <Field 
+               <Field 
+                type='text'
+                id='location'
+                name='location'
+                placeholder='Location'
+              />        
+               <TextField 
                 type='text'
                 id='review'
                 name='review'
@@ -38,19 +44,19 @@ export default function RatePark(props) {
    </div>
   )
 }          
-      
+   
         
  
 const FormikReviewForm = withFormik({
   mapPropsToValues({ park, review }) {
     return {
       park: park || '',
+      location: location || '',
       review: review || ''
     };
   },
   handleSubmit(values, tools) {
-
-
+      console.log(values, tools);
   }
 
 })

@@ -5,8 +5,10 @@
 .bottom-nav {
   position: fixed;
   bottom: 20px;
+
   left: 100%;
   transform: translateX(-100%);
+
   z-index: 1000;
   width: 30px;
   height: 30px;

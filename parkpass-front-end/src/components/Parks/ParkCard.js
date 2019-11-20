@@ -38,11 +38,21 @@ const StyledRating = withStyles({
   },
 })(Rating);
 
-export default function ParkCard( { name, location, description, review } ) {
+
+export default function ParkCard( { name, location, description, addToFaves } ) {
   const classes = useStyles();
   const [value, setValue] = useState();
-
-
+  
+  const favorite = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    const park = {
+      name: name,
+      location: location,
+      description: description
+    }
+    addToFaves(park)
+  }
 
   return (
     <Card className={classes.card}>
@@ -69,6 +79,7 @@ export default function ParkCard( { name, location, description, review } ) {
           </Box>
         </CardContent>
         </CardActionArea>
+        <button onClick={(event) => favorite(event)}>Add To Faves</button>
     </Card>
   );
 }
