@@ -21,6 +21,10 @@ const useStyles = makeStyles(theme => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  Link: {
+    textDecoration: "none",
+    color: "inherit"
+}
 }));
 
 export default function SearchForm(props) {
@@ -99,12 +103,13 @@ useEffect(() => {
 
         {data.map((park => {
         return (
-        <Link to={`parks/${park.id}`}>
+        <Link className={classes.Link} to={`parks/${park.id}`}>
         <ParkCard 
         key={park.id} 
         name={park.name} 
         description={park.description} 
         location={park.location} 
+        review={park.review}
         addToFaves={props.addToFaves}
           />
         </Link>        
