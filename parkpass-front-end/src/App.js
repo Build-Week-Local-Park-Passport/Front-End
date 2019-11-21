@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { Route, withRouter } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Search from './components/Search';
+import { getToken } from './utils/getToken';
 import { ProtectedRoute } from './utils/ProtectedRoute';
 import { useApi } from './utils/api';
 import { ParksContext } from './contexts/ParksContext';
 import { FavesContext } from './contexts/FavesContext';
+import { SignedInContext } from './contexts/SignedInContext';
 import ParkPage from './components/Parks/ParkPage';
 import AddPark from './components/Parks/AddPark';
+import EditPark from './components/Parks/EditPark';
 import UserHome from './components/User/UserHome';
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -16,6 +19,9 @@ import './App.css';
 
 
 function App() {
+
+  // check if token exists. return token if does, return null if not.
+  const isSignedIn = getToken()
 
   const [parks, error] = useApi()
   const [faves, setFaves] = useState([])
@@ -27,28 +33,40 @@ function App() {
     ])
   }
 
+  const [parkToEdit, setParkToEdit] = useState({})
+  console.log(parkToEdit)
+
   return (
-    <ParksContext.Provider value={parks}>
-      <div className="App">
-        <Nav />
-        <h1>ParkPass App</h1>
+    <SignedInContext.Provider value={isSignedIn}>
+      <ParksContext.Provider value={parks}>
+        <div className="App">
+          <Nav />
+          <h1>ParkPass App</h1>
 
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />       
-        <Route exact path="/" render={props => (
-          <Search {...props} addToFaves={addToFaves} />
-        )} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={Signup} />       
+          <Route exact path="/" render={props => (
+            <Search {...props} addToFaves={addToFaves} />
+          )} />
 
-        <FavesContext.Provider value={faves}>
-          <ProtectedRoute exact path="/account" component={UserHome} />
-        </FavesContext.Provider>
+          <FavesContext.Provider value={faves}>
+            <ProtectedRoute exact path="/account" component={UserHome} />
+          </FavesContext.Provider>
 
-        <ProtectedRoute exact path="/addpark" component={AddPark} />
-        <Route path="/parks/:id" component={ParkPage} />
+          <ProtectedRoute exact path="/addpark" component={AddPark} />
 
-        <BottomNav />
-      </div>
-    </ParksContext.Provider>
+          <Route exact path="/parks/:id" render={props => (
+            <ParkPage {...props} setParkToEdit={setParkToEdit} />
+          )} />
+          
+          <Route exact path="/editpark" render={props => (
+            <EditPark {...props} parkToEdit={parkToEdit} />
+          )} />
+
+           <BottomNav />
+        </div>
+      </ParksContext.Provider>
+    </SignedInContext.Provider>
   );
 }
 

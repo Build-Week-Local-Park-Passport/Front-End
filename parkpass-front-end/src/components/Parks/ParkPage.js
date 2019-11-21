@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -15,10 +15,12 @@ import Box from '@material-ui/core/Box';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/core/Icon';
+// import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import RatePark from './RateAndReview';
+import { SignedInContext } from '../../contexts/SignedInContext';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -65,6 +67,7 @@ const StyledRating = withStyles({
 })(Rating);
 
 const ParkPage = (props) => {
+  const isSignedIn = useContext(SignedInContext);
   const [park, setPark] = useState({
     id: '',
     name: '',
@@ -89,6 +92,7 @@ const ParkPage = (props) => {
             comment: currentPark.comment,
             rating: currentPark.rating
           });
+
           props.setParkToEdit({
             id: currentPark.id,
             name: currentPark.name,
@@ -101,7 +105,6 @@ const ParkPage = (props) => {
         .catch(error => {
           console.error(error);
         });
-
   },[]);
 
   const classes = useStyles();
@@ -155,7 +158,9 @@ const ParkPage = (props) => {
             <RatePark park={park}/>
           </CardContent>
         </Collapse>
-      </CardActionArea>      
+      </CardActionArea>
+
+      {isSignedIn && <Link to="/editpark">Edit Park</Link>}
   </Card>
   );
 }
