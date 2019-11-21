@@ -80,7 +80,7 @@ const ParkPage = (props) => {
   },[]);
 
   const classes = useStyles();
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState(0);
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -139,6 +139,13 @@ const { name, location, description } = park;
           margin="normal"
           variant="outlined"
         />
+        <br></br>
+        <StyledRating
+          name="customized-color"
+          value={value}
+          icon={<FavoriteIcon fontSize="inherit" />}
+          />
+        <br></br>
         <Button
         variant="contained"
         color="primary"

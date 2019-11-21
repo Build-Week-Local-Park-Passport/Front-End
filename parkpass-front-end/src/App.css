@@ -5,8 +5,10 @@
 .bottom-nav {
   position: fixed;
   bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+
+  left: 100%;
+  transform: translateX(-100%);
+
   z-index: 1000;
   width: 30px;
   height: 30px;
@@ -23,3 +25,22 @@
   color: white;
   font-size: 20px;
 }
+
+.addParkButton {
+  position: fixed;
+  bottom: 20px;
+  left: 100%;
+  transform: translateX(-100%);
+  z-index: 1000;
+  width: 1275px
+}
+
+@media (max-width: 400px) {
+  .addParkButton {
+    width: 125px;
+}}
+
+@media (max-width: 900px) {
+  .addParkButton {
+    width: 325px;
+}}

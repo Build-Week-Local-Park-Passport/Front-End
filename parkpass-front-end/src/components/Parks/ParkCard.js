@@ -16,8 +16,9 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 345,
     margin: "20px auto",
     boxShadow: "0 8px 40px -15px rgba(0,0,0,0.3)",
-    "borderRadius": "5px"
-  },
+    "borderRadius": "5px",
+    "textDecoration": "none"
+    },
   details: {
     marginTop: "10px",
     textAlign: "left"
@@ -37,9 +38,21 @@ const StyledRating = withStyles({
   },
 })(Rating);
 
-export default function ParkCard( { name, location, description } ) {
+
+export default function ParkCard( { name, location, description, addToFaves } ) {
   const classes = useStyles();
-  const [value, setValue] = useState(2);
+  const [value, setValue] = useState();
+  
+  const favorite = (event) => {
+    event.preventDefault()
+    event.stopPropagation()
+    const park = {
+      name: name,
+      location: location,
+      description: description
+    }
+    addToFaves(park)
+  }
 
   return (
     <Card className={classes.card}>
@@ -66,6 +79,7 @@ export default function ParkCard( { name, location, description } ) {
           </Box>
         </CardContent>
         </CardActionArea>
+        <button onClick={(event) => favorite(event)}>Add To Faves</button>
     </Card>
   );
 }
