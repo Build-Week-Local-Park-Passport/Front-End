@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -15,9 +15,11 @@ import Box from '@material-ui/core/Box';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/core/Icon';
+// import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
+import { SignedInContext } from '../../contexts/SignedInContext';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -64,19 +66,38 @@ const StyledRating = withStyles({
 })(Rating);
 
 const ParkPage = (props) => {
-  const [park, setPark] = useState([]);
+  const isSignedIn = useContext(SignedInContext);
+  const [park, setPark] = useState({
+    id: '',
+    name: '',
+    description: '',
+    location: ''
+  });
 
   useEffect(() => {
     const id = props.match.params.id;
        axios
         .get(`https://park-passport.herokuapp.com/api/parks/${id}`)
         .then(response => {
-          setPark(response.data);
+          const currentPark = response.data
+          setPark({
+            id: currentPark.id,
+            name: currentPark.name,
+            description: currentPark.description,
+            location: currentPark.location
+          });
+
+          // set the parkToEdit to the current park
+          props.setParkToEdit({
+            id: currentPark.id,
+            name: currentPark.name,
+            description: currentPark.description,
+            location: currentPark.location
+          });
         })
         .catch(error => {
           console.error(error);
         });
-
   },[]);
 
   const classes = useStyles();
@@ -86,22 +107,20 @@ const ParkPage = (props) => {
     setExpanded(!expanded);
 };
 
-const { name, location, description } = park;
-
   return (
     <Card className={classes.card}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {name}
+            {park.name}
           </Typography>
 
           <Divider variant="middle" />
             <div className={classes.details}>
               <Typography variant="body2" color="textSecondary" component="p">
-                Location: {location}
+                Location: {park.location}
                 <br></br>
-                Description: {description}
+                Description: {park.description}
               </Typography>
             </div>
 
@@ -157,7 +176,9 @@ const { name, location, description } = park;
 
           </CardContent>
         </Collapse>
-      </CardActionArea>      
+      </CardActionArea>
+
+      {isSignedIn && <Link to="/editpark">Edit Park</Link>}
   </Card>
   );
 }
