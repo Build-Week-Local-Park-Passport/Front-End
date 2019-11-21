@@ -24,19 +24,6 @@ function App() {
   const isSignedIn = getToken()
 
   const [parks, error] = useApi()
-  const [newParks, setParks] = useState([
-    {
-      id: 20,
-      park: "1",
-      location: "2",
-      description: "3"
-    }
-  ]);
-
-  const addNewPark = park => {
-    setParks([...parks, park]);
-  };
-
   const [faves, setFaves] = useState([])
 
   const addToFaves = park => {
@@ -76,7 +63,7 @@ function App() {
             <EditPark {...props} parkToEdit={parkToEdit} />
           )} />
 
-          <BottomNav addNewPark={addNewPark}/>
+           <BottomNav />
         </div>
       </ParksContext.Provider>
     </SignedInContext.Provider>

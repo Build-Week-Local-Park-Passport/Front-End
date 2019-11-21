@@ -18,6 +18,7 @@ import TextField from '@material-ui/core/TextField';
 // import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
+import RatePark from './RateAndReview';
 import { SignedInContext } from '../../contexts/SignedInContext';
 import { Link } from 'react-router-dom';
 
@@ -71,8 +72,11 @@ const ParkPage = (props) => {
     id: '',
     name: '',
     description: '',
-    location: ''
+    location: '',
+    comment: '',
+    rating: ''
   });
+  console.log(park);
 
   useEffect(() => {
     const id = props.match.params.id;
@@ -84,15 +88,18 @@ const ParkPage = (props) => {
             id: currentPark.id,
             name: currentPark.name,
             description: currentPark.description,
-            location: currentPark.location
+            location: currentPark.location,
+            comment: currentPark.comment,
+            rating: currentPark.rating
           });
 
-          // set the parkToEdit to the current park
           props.setParkToEdit({
             id: currentPark.id,
             name: currentPark.name,
             description: currentPark.description,
-            location: currentPark.location
+            location: currentPark.location,
+            comment: currentPark.comment,
+            rating: currentPark.rating
           });
         })
         .catch(error => {
@@ -148,32 +155,7 @@ const ParkPage = (props) => {
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-
-          <TextField
-          id="outlined-textarea"
-          label="Leave a Review"
-          placeholder=""
-          multiline
-          className={classes.textField}
-          margin="normal"
-          variant="outlined"
-        />
-        <br></br>
-        <StyledRating
-          name="customized-color"
-          value={value}
-          icon={<FavoriteIcon fontSize="inherit" />}
-          />
-        <br></br>
-        <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        endIcon={<SendIcon/>}
-      >
-        Send
-      </Button>
-
+            <RatePark park={park}/>
           </CardContent>
         </Collapse>
       </CardActionArea>

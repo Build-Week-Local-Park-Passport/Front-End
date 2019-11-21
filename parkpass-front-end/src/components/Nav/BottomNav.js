@@ -13,6 +13,8 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import '../../App.css';
 import { axiosWithAuth } from "../../utils/api"
+import axios from 'axios';
+
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -38,31 +40,29 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const BottomNav = props => {
-  const [park, setPark] = useState({
-    park: "",
+const BottomNav = (props) => {
+  const [newPark, setNewPark] = useState({
+    name: "",
     location: "",
     description: ""
   });
 
   const handleChange = event => {
-    setPark({ ...park, [event.target.name]: event.target.value });
+    setNewPark({ ...newPark, [event.target.name]: event.target.value });
   };
 
   const submitHandler = event => {
     event.preventDefault();
-    const newPark = {
-      ...park,
-      id: Date.now()
-    };
-    axiosWithAuth()
+    console.log(newPark);
+
+    axios
         .post('https://park-passport.herokuapp.com/api/parks', newPark) 
         .then(res => {
-          console.log("fired", res);
-          setPark({ park: "", location: "", description: ""});
-          props.addNewPark(newPark);
           handleClose();
+          window.location=window.location;
+          console.log("fired", res);
         })
+        .catch(err => console.log(err.response));
   };
 
 
@@ -95,8 +95,8 @@ const BottomNav = props => {
           className={classes.textField}
           label="Add New Park"
           margin="normal"
-          name="park"
-          value={park.park}
+          name="name"
+          value={newPark.name}
           onChange={handleChange}
         />
       <TextField
@@ -105,7 +105,7 @@ const BottomNav = props => {
           label="Add Park Location"
           margin="normal"
           name="location"
-          value={park.location}
+          value={newPark.location}
           onChange={handleChange}
         />
       <TextField
@@ -116,7 +116,7 @@ const BottomNav = props => {
           multiline
           rowsMax="4"
           name="description"
-          value={park.description}
+          value={newPark.description}
           onChange={handleChange}
         />
         </DialogContent>
