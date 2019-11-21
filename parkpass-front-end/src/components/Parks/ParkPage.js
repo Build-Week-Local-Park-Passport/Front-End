@@ -18,6 +18,7 @@ import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
+import RatePark from './RateAndReview';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -129,31 +130,8 @@ const { name, location, description } = park;
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-
-          <TextField
-          id="outlined-textarea"
-          label="Leave a Review"
-          placeholder=""
-          multiline
-          className={classes.textField}
-          margin="normal"
-          variant="outlined"
-        />
-        <br></br>
-        <StyledRating
-          name="customized-color"
-          value={value}
-          icon={<FavoriteIcon fontSize="inherit" />}
-          />
-        <br></br>
-        <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        endIcon={<SendIcon/>}
-      >
-        Send
-      </Button>
+            <RatePark/>
+    
 
           </CardContent>
         </Collapse>
