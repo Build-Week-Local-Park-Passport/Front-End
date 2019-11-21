@@ -3,16 +3,19 @@ import { withFormik, Formik, Form, Field } from 'formik';
 import { axiosWithAuth } from '../../utils/api';
 
 /* Set slices of state for form */
-
-
-
-const RRForm = ({ values }) => {
+const RRForm = ({ values, park }) => {
   
-
  /* Add Form */
   return (
     <div className='Review'>
              <Form>
+             <Field 
+                type='hidden'
+                id='park_id'
+                name='park_id'
+                placeholder=''
+                value={values.park_id}
+              />  
                <Field 
                 type='text'
                 id='rating'
@@ -33,12 +36,13 @@ const RRForm = ({ values }) => {
    </div>
   );
 };
-        
+
+
  
 const FormikReviewForm = withFormik({
-  mapPropsToValues({ park_id, rating, comment }) {
+  mapPropsToValues({ park, rating, comment }) {
     return {
-      park_id: park_id || '',
+      park_id: park.id || '',
       rating: rating || '',
       comment: comment || ''
     };

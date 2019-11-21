@@ -65,14 +65,38 @@ const StyledRating = withStyles({
 })(Rating);
 
 const ParkPage = (props) => {
-  const [park, setPark] = useState([]);
+  const [park, setPark] = useState({
+    id: '',
+    name: '',
+    description: '',
+    location: '',
+    comment: '',
+    rating: ''
+  });
+  console.log(park);
 
   useEffect(() => {
     const id = props.match.params.id;
        axios
         .get(`https://park-passport.herokuapp.com/api/parks/${id}`)
         .then(response => {
-          setPark(response.data);
+          const currentPark = response.data
+          setPark({
+            id: currentPark.id,
+            name: currentPark.name,
+            description: currentPark.description,
+            location: currentPark.location,
+            comment: currentPark.comment,
+            rating: currentPark.rating
+          });
+          props.setParkToEdit({
+            id: currentPark.id,
+            name: currentPark.name,
+            description: currentPark.description,
+            location: currentPark.location,
+            comment: currentPark.comment,
+            rating: currentPark.rating
+          });
         })
         .catch(error => {
           console.error(error);
@@ -87,22 +111,20 @@ const ParkPage = (props) => {
     setExpanded(!expanded);
 };
 
-const { name, location, description } = park;
-
   return (
     <Card className={classes.card}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {name}
+            {park.name}
           </Typography>
 
           <Divider variant="middle" />
             <div className={classes.details}>
               <Typography variant="body2" color="textSecondary" component="p">
-                Location: {location}
+                Location: {park.location}
                 <br></br>
-                Description: {description}
+                Description: {park.description}
               </Typography>
             </div>
 
@@ -130,9 +152,7 @@ const { name, location, description } = park;
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <RatePark/>
-    
-
+            <RatePark park={park}/>
           </CardContent>
         </Collapse>
       </CardActionArea>      
