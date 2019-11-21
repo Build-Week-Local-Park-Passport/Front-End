@@ -32,15 +32,10 @@
   left: 100%;
   transform: translateX(-100%);
   z-index: 1000;
-  width: 1275px
+  width: 275px
 }
-
-@media (max-width: 400px) {
-  .addParkButton {
-    width: 125px;
-}}
 
 @media (max-width: 900px) {
   .addParkButton {
-    width: 325px;
+    width: 125px;
 }}
