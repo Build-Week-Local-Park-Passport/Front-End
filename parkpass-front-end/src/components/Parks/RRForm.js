@@ -21,6 +21,7 @@ const RRForm = ({ values, park }) => {
 
  /* Add Form */
 console.log(values);
+
   return (
     <div className='Review'>
           <Form>            
@@ -52,6 +53,7 @@ console.log(values);
               icon={<FavoriteIcon fontSize="inherit" />}
               onChange={(event, newValue) => {
                 setValue(newValue);
+                console.log(newValue);
               }}
              />
              <br></br>
@@ -65,20 +67,28 @@ const FormikReviewForm = withFormik({
   mapPropsToValues({ park, rating, comment }) {
     return {
       park_id: park.id || '',
+      rating: rating || '',
       comment: comment || ''
     };
   },
   handleSubmit(values, tools) {
     axiosWithAuth()
-      .post(`https://park-passport.herokuapp.com/api/parks/ratings/test`, values)          
+      .post(`https://park-passport.herokuapp.com/api/parks/ratings/test`, values)
+          
       .then(res => {
-      console.log("fired", res);
+       console.log("fired", res);
+       
       })
+      tools.resetForm();
       .catch(err => console.log(err));
-       tools.resetForm();
-    } 
+      
+     }   
   })(RRForm);
-  console.log(FormikReviewForm);
+  console.log(FormikReviewForm);      
+    
+
+      
+
 /* Add hover & heart ranks */     
 
 export default FormikReviewForm;
