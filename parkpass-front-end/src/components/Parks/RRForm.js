@@ -1,10 +1,23 @@
 import React, { useState } from 'react';
-import { withFormik, Formik, Form, Field } from 'formik';
+import { withFormik, Formik, Form, Field, setNestedObjectValues } from 'formik';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Rating from '@material-ui/lab/Rating';
+import { withStyles } from '@material-ui/core/styles';
 import { axiosWithAuth } from '../../utils/api';
 
 /* Set slices of state for form */
+
+const StyledRating = withStyles({
+  iconFilled: {
+    color: '#ff6d75',
+  },
+  iconHover: {
+    color: '#ff3d47',
+  },
+})(Rating);
+
 const RRForm = ({ values, park }) => {
-  
+  const [value, setValue] = React.useState(2);
  /* Add Form */
   return (
     <div className='Review'>
@@ -16,18 +29,28 @@ const RRForm = ({ values, park }) => {
                 placeholder=''
                 value={values.park_id}
               />  
-               <Field 
+               {/* <Field 
                 type='text'
                 id='rating'
                 name='rating'
-                placeholder='rating'
+                placeholder='Rating'
                 value={values.rating}
-              />        
+              />         */}
+             <StyledRating
+              name="simple-controlled"
+              value={value}
+              icon={<FavoriteIcon fontSize="inherit" />}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
+              
+            /><br></br>
+
                <Field 
                 type='text'
                 id='comment'
                 name='comment'
-                placeholder='comment'
+                placeholder='Comment'
                 value={values.comment}
               />   
               <button type="submit">Submit</button>
@@ -51,7 +74,7 @@ const FormikReviewForm = withFormik({
     axiosWithAuth()
     .post('https://park-passport.herokuapp.com/api/parks/ratings/test', values) 
     .then(res => {
-      console.log("fired", res);
+     console.log("fired", res);
     })
     .catch(err => console.log(err));
   }
