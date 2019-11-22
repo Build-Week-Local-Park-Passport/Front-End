@@ -54,7 +54,7 @@ const RRForm = ({ values, park }) => {
                 name='comment'
                 placeholder='Comment'
                 value={values.comment}
-              />   
+              /><br></br>   
               <button type="submit">Submit</button>
      
           </Form> 
