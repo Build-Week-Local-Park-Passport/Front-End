@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-export default function Signup(props) {
+export default function Signup() {
   const [data, setData] = useState({
     username: '',
     password: ''
