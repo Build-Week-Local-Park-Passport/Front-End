@@ -20,10 +20,10 @@ const RRForm = ({ values, park }) => {
   const [value, setValue] = useState(0);
 
  /* Add Form */
-
+console.log(values);
   return (
     <div className='Review'>
-             <Form>
+          <Form>            
              <Field 
                 type='hidden'
                 id='park_id'
@@ -38,16 +38,6 @@ const RRForm = ({ values, park }) => {
                 placeholder='Rating'
                 value={values.rating}
               />         */}
-             <StyledRating
-              name="simple-controlled"
-              value={value}
-              icon={<FavoriteIcon fontSize="inherit" />}
-              onChange={(event, newValue) => {
-                setValue(newValue);
-              }}
-              
-            /><br></br>
-
                <Field 
                 type='text'
                 id='comment'
@@ -55,38 +45,49 @@ const RRForm = ({ values, park }) => {
                 placeholder='Comment'
                 value={values.comment}
               /><br></br>   
-              <button type="submit">Submit</button>
-     
-          </Form> 
+
+             <StyledRating
+              name="simple-controlled"
+              value={value}
+              icon={<FavoriteIcon fontSize="inherit" />}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
+             />
+             <br></br>
+          <button type="submit">Submit</button>
+        </Form> 
    </div>
   );
-};
-
-
- 
+};      
+         
 const FormikReviewForm = withFormik({
   mapPropsToValues({ park, rating, comment }) {
     return {
       park_id: park.id || '',
-      rating: rating || '',
       comment: comment || ''
     };
   },
   handleSubmit(values, tools) {
     axiosWithAuth()
-      .post('https://park-passport.herokuapp.com/api/parks/ratings/test', values) 
+      .post(`https://park-passport.herokuapp.com/api/parks/ratings/test`, values)          
       .then(res => {
       console.log("fired", res);
-      tools.resetForm();
       })
       .catch(err => console.log(err));
-    }
+       tools.resetForm();
+    } 
   })(RRForm);
   console.log(FormikReviewForm);
 /* Add hover & heart ranks */     
 
 export default FormikReviewForm;
-             
+                  
+    
+
+
+ 
+
            
                 
                 

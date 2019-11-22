@@ -9,17 +9,15 @@ import { ParksContext } from './contexts/ParksContext';
 import { FavesContext } from './contexts/FavesContext';
 import { SignedInContext } from './contexts/SignedInContext';
 import ParkPage from './components/Parks/ParkPage';
-
-
 import AddPark from './components/Parks/AddPark';
 import EditPark from './components/Parks/EditPark';
-
 import UserHome from './components/User/UserHome';
 import Login from './components/Login';
 import Signup from './components/Signup';
-
 import BottomNav from './components/Nav/BottomNav';
 import './App.css';
+
+
 
 
 function App() {
