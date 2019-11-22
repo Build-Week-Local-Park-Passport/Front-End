@@ -19,6 +19,7 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import RatePark from './RateAndReview';
+import DisplayParkReviews from './DisplayParkReviews';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -73,7 +74,6 @@ const ParkPage = (props) => {
     comment: '',
     rating: ''
   });
-  console.log(park);
 
   useEffect(() => {
     const id = props.match.params.id;
@@ -152,6 +152,7 @@ const ParkPage = (props) => {
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
+            <DisplayParkReviews park={park}/>
             <RatePark park={park}/>
           </CardContent>
         </Collapse>

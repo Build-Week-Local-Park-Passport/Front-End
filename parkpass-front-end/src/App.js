@@ -44,7 +44,7 @@ function App() {
         </FavesContext.Provider>
 
         <ProtectedRoute exact path="/addpark" component={AddPark} />
-        <Route path="/parks/:id" component={ParkPage} />
+        <Route path="/parks/:id" component={ParkPage}/>
 
         <BottomNav />
       </div>
