@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { withFormik, Formik, Form, Field, setNestedObjectValues } from 'formik';
+import { withFormik, Form, Field, } from 'formik';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import Rating from '@material-ui/lab/Rating';
 import { withStyles } from '@material-ui/core/styles';
@@ -16,11 +16,12 @@ const StyledRating = withStyles({
   },
 })(Rating);
 
-const RRForm = ({ values, park }) => {
+const RRForm = (props) => {
   const [value, setValue] = useState(0);
+  const [park, setPark] = useState('');
 
  /* Add Form */
-console.log(values);
+//console.log(values);
 
   return (
     <div className='Review'>
@@ -30,7 +31,7 @@ console.log(values);
                 id='park_id'
                 name='park_id'
                 placeholder=''
-                value={values.park_id}
+                value={value.park_id}
               />  
                {/* <Field 
                 type='text'
@@ -44,8 +45,10 @@ console.log(values);
                 id='comment'
                 name='comment'
                 placeholder='Comment'
-                value={values.comment}
+                value={value.comment}
               /><br></br>   
+
+{/* * Add hover & heart ranks */}
 
              <StyledRating
               name="simple-controlled"
@@ -53,13 +56,23 @@ console.log(values);
               icon={<FavoriteIcon fontSize="inherit" />}
               onChange={(event, newValue) => {
                 setValue(newValue);
-                console.log(newValue);
+                //console.log(newValue);
               }}
              />
              <br></br>
           <button type="submit">Submit</button>
         </Form> 
-   </div>
+         {park.map(parks => (
+           <ul key={parks.id}>
+             <li>Name: {parks.name}</li>
+             <li>Id: {parks.id}</li>
+             <li>Uername: {parks.username}</li>
+             <li>Rating: {parks.rating}</li>
+             <li>Comment: {parks.comment}</li>
+             </ul>
+         ))} 
+
+      </div>
   );
 };      
          
@@ -67,29 +80,27 @@ const FormikReviewForm = withFormik({
   mapPropsToValues({ park, rating, comment }) {
     return {
       park_id: park.id || '',
-      rating: rating || '',
+      rating: rating || false,
       comment: comment || ''
     };
   },
-  handleSubmit(values, tools) {
+  handleSubmit(values, tools, {setPark}) {
     axiosWithAuth()
-      .post(`https://park-passport.herokuapp.com/api/parks/ratings/test`, values)
-          
+      .post(`https://park-passport.herokuapp.com/api/parks/ratings/test`, values)          
       .then(res => {
-       console.log("fired", res);
-       
+        setPark(res.data);
+        console.log(res);
       })
-      tools.resetForm();
       .catch(err => console.log(err));
-      
-     }   
-  })(RRForm);
-  console.log(FormikReviewForm);      
+       tools.resetForm();
+    }, 
     
-
+  })(RRForm);
+  console.log(FormikReviewForm);
+  
       
 
-/* Add hover & heart ranks */     
+    
 
 export default FormikReviewForm;
                   
