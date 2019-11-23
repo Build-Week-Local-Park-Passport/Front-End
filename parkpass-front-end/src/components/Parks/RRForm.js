@@ -5,8 +5,24 @@ import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 import { axiosWithAuth } from '../../utils/api';
 import { SignedInContext } from '../../contexts/SignedInContext';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
 
 /* Set slices of state for form */
+
+const useStyles = makeStyles({
+  textField: {
+    "border": "1px solid lightgray",
+    padding: "10px 10px",
+    borderRadius: "5px"
+  },
+  button: {
+    "border": "none",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    boxShadow: "1px 10px 5px -6px rgba(194,194,194,1)"
+  }
+});
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -16,8 +32,6 @@ const StyledRating = withStyles({
     color: '#ff3d47',
   },
 })(Rating);
-
-
 
 export default function RRForm({ values, park }) {
 
@@ -56,6 +70,8 @@ export default function RRForm({ values, park }) {
       window.location.href = '/login'
     }
   }
+  
+  const classes = useStyles();
 
  /* Add Form */
   return (
@@ -99,8 +115,12 @@ export default function RRForm({ values, park }) {
                 setValue(newValue)
               }}
              />
-             <br></br>
-          <button type="submit">Submit</button>
-        </form> 
+
+             <br></br><br></br>
+             <button type="submit" className={classes.button}>SUBMIT</button>
+
+              </div>
+        </Form> 
    </div>
-)}
+  )
+};

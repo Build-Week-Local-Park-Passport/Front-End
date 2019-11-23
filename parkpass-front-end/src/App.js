@@ -15,9 +15,15 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import BottomNav from './components/Nav/BottomNav';
 import './App.css';
+import './index.css'
+import { makeStyles } from '@material-ui/core/styles';
 
 
-
+const useStyles = makeStyles({
+  title: {
+    fontFamily: "Merriweather"
+  }  
+});
 
 function App() {
 
@@ -25,6 +31,7 @@ function App() {
 
   // check if token exists. return token if does, return null if not.
   const isSignedIn = getToken()
+  const classes = useStyles();
 
   const [parks, error] = useApi()
   const [faves, setFaves] = useState([])
@@ -50,7 +57,7 @@ function App() {
       <ParksContext.Provider value={parks}>
         <div className="App">
           <Nav />
-          <h1>ParkPass App</h1>
+          <h1 className={classes.title}>ParkPass App</h1>
 
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />       
