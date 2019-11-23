@@ -1,67 +1,93 @@
 import React, { useState } from 'react';
-import { Formik, Form, Field } from 'formik';
-import axios from 'axios';
+import { withFormik, Formik, Form, Field, setNestedObjectValues } from 'formik';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import Rating from '@material-ui/lab/Rating';
+import { withStyles } from '@material-ui/core/styles';
+import { axiosWithAuth } from '../../utils/api';
 
 /* Set slices of state for form */
 
-export default function RatePark(props) {
-  const [review, setReview] = useState( {
-    park: '',
-    review: ''
-  });
+const StyledRating = withStyles({
+  iconFilled: {
+    color: '#ff6d75',
+  },
+  iconHover: {
+    color: '#ff3d47',
+  },
+})(Rating);
+
+const RRForm = ({ values, park }) => {
+  const [value, setValue] = useState(0);
 
  /* Add Form */
+console.log(values);
   return (
     <div className='Review'>
-      <div>{review}</div>
-
-        <Formik 
-          initialValues={{ park: '', review: '' }}
-          onsubmit={handleSubmit}
-          render={props => {
-             <Form>
-                <Field 
-                  type='text' 
-                  id='name'
-                  name='name'
-                  placeholder='Name'
-                  />
+          <Form>            
+             <Field 
+                type='hidden'
+                id='park_id'
+                name='park_id'
+                placeholder=''
+                value={values.park_id}
+              />  
+               {/* <Field 
+                type='text'
+                id='rating'
+                name='rating'
+                placeholder='Rating'
+                value={values.rating}
+              />         */}
                <Field 
                 type='text'
-                id='location'
-                name='location'
-                placeholder='Location'
-              />        
-               <TextField 
-                type='text'
-                id='review'
-                name='review'
-                placeholder='Review'
-              />        
-          </Form> 
-        }}
-       />
+                id='comment'
+                name='comment'
+                placeholder='Comment'
+                value={values.comment}
+              /><br></br>   
+
+             <StyledRating
+              name="simple-controlled"
+              value={value}
+              icon={<FavoriteIcon fontSize="inherit" />}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
+             />
+             <br></br>
+          <button type="submit">Submit</button>
+        </Form> 
    </div>
-  )
-}          
-   
-        
- 
+  );
+};      
+         
 const FormikReviewForm = withFormik({
-  mapPropsToValues({ park, review }) {
+  mapPropsToValues({ park, rating, comment }) {
     return {
-      park: park || '',
-      location: location || '',
-      review: review || ''
+      park_id: park.id || '',
+      comment: comment || ''
     };
   },
   handleSubmit(values, tools) {
-      console.log(values, tools);
-  }
+    axiosWithAuth()
+      .post(`https://park-passport.herokuapp.com/api/parks/ratings/test`, values)          
+      .then(res => {
+      console.log("fired", res);
+      })
+      .catch(err => console.log(err));
+       tools.resetForm();
+    } 
+  })(RRForm);
+  console.log(FormikReviewForm);
+/* Add hover & heart ranks */     
 
-})
-/* Add hover & heart ranks */             
-             
+export default FormikReviewForm;
+                  
+    
+
+
+ 
+
            
                 
                 
