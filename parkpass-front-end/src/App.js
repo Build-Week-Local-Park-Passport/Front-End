@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { Route, withRouter } from 'react-router-dom';
+import { Route, withRouter, useParams } from 'react-router-dom';
 import Nav from './components/Nav/Nav';
 import Search from './components/Search';
 import { getToken } from './utils/getToken';
 import { ProtectedRoute } from './utils/ProtectedRoute';
 import { useApi } from './utils/api';
 import { ParksContext } from './contexts/ParksContext';
-import { FavesContext } from './contexts/FavesContext';
 import { SignedInContext } from './contexts/SignedInContext';
 import ParkPage from './components/Parks/ParkPage';
 import AddPark from './components/Parks/AddPark';
@@ -22,6 +21,8 @@ import './App.css';
 
 function App() {
 
+  const { id } = useParams()
+
   // check if token exists. return token if does, return null if not.
   const isSignedIn = getToken()
 
@@ -35,8 +36,14 @@ function App() {
     ])
   }
 
+  const removeFromFaves = park => {
+    const updatedFaves = faves.filter(fav => {
+      return fav.name !== park.name
+    })
+    setFaves(updatedFaves)
+  }
+
   const [parkToEdit, setParkToEdit] = useState({})
-  console.log(parkToEdit)
 
   return (
     <SignedInContext.Provider value={isSignedIn}>
@@ -48,12 +55,12 @@ function App() {
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />       
           <Route exact path="/" render={props => (
-            <Search {...props} addToFaves={addToFaves} />
+            <Search {...props} addToFaves={addToFaves} removeFromFaves={removeFromFaves} />
           )} />
 
-          <FavesContext.Provider value={faves}>
-            <ProtectedRoute exact path="/account" component={UserHome} />
-          </FavesContext.Provider>
+          <Route exact path="/account" render={props => (
+            <UserHome {...props} faves={faves} remove={removeFromFaves} />
+          )} />
 
           <ProtectedRoute exact path="/addpark" component={AddPark} />
 

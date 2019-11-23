@@ -21,6 +21,7 @@ import SendIcon from '@material-ui/icons/Send';
 import RatePark from './RateAndReview';
 import { SignedInContext } from '../../contexts/SignedInContext';
 import { Link } from 'react-router-dom';
+import { axiosWithAuth } from '../../utils/api';
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -76,10 +77,10 @@ const ParkPage = (props) => {
     comment: '',
     rating: ''
   });
-  console.log(park);
+
+  const id = props.match.params.id;
 
   useEffect(() => {
-    const id = props.match.params.id;
        axios
         .get(`https://park-passport.herokuapp.com/api/parks/${id}`)
         .then(response => {
@@ -113,6 +114,20 @@ const ParkPage = (props) => {
   const handleExpandClick = () => {
     setExpanded(!expanded);
 };
+
+const deletePark = () => {
+  if(window.confirm('Are you sure you wanna delete the entire park??')) {
+    axios
+      .delete(`https://park-passport.herokuapp.com/api/parks/${id}`)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log('----------------->>>>>>>>>>>>>>')
+        console.log(err)
+      })
+  }
+}
 
   return (
     <Card className={classes.card}>
@@ -161,6 +176,8 @@ const ParkPage = (props) => {
       </CardActionArea>
 
       {isSignedIn && <Link to="/editpark">Edit Park</Link>}
+      {isSignedIn && <button onClick={deletePark}>Delete Park</button>}
+      <button onClick={() => props.history.goBack()}>Go Back</button>
   </Card>
   );
 }
