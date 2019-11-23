@@ -21,7 +21,6 @@ import SendIcon from '@material-ui/icons/Send';
 import RatePark from './RateAndReview';
 import { SignedInContext } from '../../contexts/SignedInContext';
 import { Link } from 'react-router-dom';
-import DisplayParkReviews from "./DisplayParkReviews";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -155,7 +154,6 @@ const ParkPage = (props) => {
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <DisplayParkReviews  />
             <RatePark park={park}/>
           </CardContent>
         </Collapse>
