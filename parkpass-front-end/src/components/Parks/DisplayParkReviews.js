@@ -11,41 +11,38 @@ const DisplayParkReviews = props => {
       axios
         .get(`https://park-passport.herokuapp.com/api/parks/${id}/ratings`)
         .then(response => {
-          setParkReviews(response.data);
-          console.log(response);
-        })
+          const currentReview = response.data
+          setParkReviews({
+            name: currentReview.name,
+            id: currentReview.id,
+            username: currentReview.username,
+            rating: currentReview.rating,
+            comment: currentReview.comment
+        });
+        console.log(response);
+      })
         .catch(error => {
           console.error('Server Error', error);
         });
     }
-    
-    getParkReviews();
   }, []);
 
   return (
-    <div >
-      {parkReviews.map(parkReview => (
-        <ReviewDetails id={parkReview.id} parkReview={parkReview} />
-      ))}
-    </div>
+    <section>
+
+    {parkReviews.map(parkReview => (
+      <ParkReviewsForm 
+      name={parkReview.name} 
+      id={parkReview.id} 
+      username={parkReview.username}
+      rating={parkReview.rating} 
+      comment={parkReview.comment} 
+      />
+    ))}
+  </section>
   );
+
 }
 
-function ReviewDetails({ parkReview }) {
-  const { name, id, username, rating, comment } = parkReview;
-  return (
-    <div >
-      <div>
-        <h2>{parkReview.username}</h2>
-        <div>
-          Rating: <em>{parkReview.rating}</em>
-        </div>
-        <div>
-          Comment: <strong>{parkReview.comment}</strong>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export default DisplayParkReviews;

@@ -19,12 +19,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import SendIcon from '@material-ui/icons/Send';
 import RatePark from './RateAndReview';
-<<<<<<< HEAD
-import DisplayParkReviews from './DisplayParkReviews';
-=======
 import { SignedInContext } from '../../contexts/SignedInContext';
 import { Link } from 'react-router-dom';
->>>>>>> 3bc8fe3ca8675fb39e8b3a68f7cfc29b1f67b4dc
+import DisplayParkReviews from "./DisplayParkReviews";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -158,7 +155,7 @@ const ParkPage = (props) => {
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <DisplayParkReviews park={park}/>
+            <DisplayParkReviews  />
             <RatePark park={park}/>
           </CardContent>
         </Collapse>

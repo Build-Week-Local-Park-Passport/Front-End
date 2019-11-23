@@ -16,6 +16,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import BottomNav from './components/Nav/BottomNav';
 import './App.css';
+import DisplayParkReviews from "./components/Parks/DisplayParkReviews";
 
 
 function App() {
@@ -34,32 +35,8 @@ function App() {
   }
 
   const [parkToEdit, setParkToEdit] = useState({})
-  console.log(parkToEdit)
 
   return (
-<<<<<<< HEAD
-    <ParksContext.Provider value={parks}>
-      <div className="App">
-        <Nav />
-        <h1>ParkPass App</h1>
-
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />       
-        <Route exact path="/" render={props => (
-          <Search {...props} addToFaves={addToFaves} />
-        )} />
-
-        <FavesContext.Provider value={faves}>
-          <ProtectedRoute exact path="/account" component={UserHome} />
-        </FavesContext.Provider>
-
-        <ProtectedRoute exact path="/addpark" component={AddPark} />
-        <Route path="/parks/:id" component={ParkPage}/>
-
-        <BottomNav />
-      </div>
-    </ParksContext.Provider>
-=======
     <SignedInContext.Provider value={isSignedIn}>
       <ParksContext.Provider value={parks}>
         <div className="App">
@@ -90,7 +67,6 @@ function App() {
         </div>
       </ParksContext.Provider>
     </SignedInContext.Provider>
->>>>>>> 3bc8fe3ca8675fb39e8b3a68f7cfc29b1f67b4dc
   );
 }
 

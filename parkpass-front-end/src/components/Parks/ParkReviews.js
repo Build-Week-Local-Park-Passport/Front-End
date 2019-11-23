@@ -37,7 +37,7 @@ const StyledRating = withStyles({
 })(Rating);
 
 
-const ParkReviews = (props) => {
+const ParkReviews = ({ name, id, username, rating, comment }) => {
   const [parkReview, setParkReview] = useState([]);
  
   useEffect(() => {
@@ -45,27 +45,32 @@ const ParkReviews = (props) => {
        axios
         .get(`https://park-passport.herokuapp.com/api/parks/${id}/ratings`)
         .then(response => {
-          setParkReview(response.data);
+            const currentReview = response.data
+          setParkReview({
+            name: name,
+            id: id,
+            username: username,
+            rating: rating,
+            comment: comment
+          });
           console.log(response);
         })
         .catch(error => {
           console.error(error);
         });
 
-  },);
+  },[]);
   
 
   if (!parkReview) {
     return <div>No comments so far...</div>;
 
   }
-
-  const { name, id, username, rating, comment } = parkReview;
-
   return (
-    <div >
       <div>
         <h2>{username}</h2>
+        <h2>{name}</h2>
+        <h2>{id}</h2>
         <div>
           Rating: <em>{rating}</em>
         </div>
@@ -73,7 +78,6 @@ const ParkReviews = (props) => {
           Comment: <strong>{comment}</strong>
         </div>
       </div>
-    </div>
   );
 }
 
