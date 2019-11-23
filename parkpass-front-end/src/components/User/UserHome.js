@@ -1,20 +1,19 @@
-import React, { useContext } from 'react'
-import { FavesContext } from '../../contexts/FavesContext'
+import React from 'react'
 
-export default function UserHome() {
+export default function UserHome({ faves, remove }) {
   const username = localStorage.getItem('username')
-  const faves = useContext(FavesContext)
-  console.log('faves', faves)
 
   return (
     <div>
       <p>{username}</p>
       <h1>My Favorites</h1>
       {faves && faves.map((fav, index) => {
+        console.log(fav)
         return (
           <div key={index}>
             <h3>{fav.name}</h3>
             <p>{fav.description}</p>
+            <button onClick={() => remove(fav)}>Remove</button>
           </div>
         )
       })}
