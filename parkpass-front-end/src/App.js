@@ -18,6 +18,8 @@ import BottomNav from './components/Nav/BottomNav';
 import './App.css';
 
 
+
+
 function App() {
 
   // check if token exists. return token if does, return null if not.
