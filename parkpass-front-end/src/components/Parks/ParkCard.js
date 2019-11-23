@@ -45,6 +45,8 @@ export default function ParkCard( { name, location, description, addToFaves, rem
 
   const classes = useStyles();
 
+  const isSignedIn = useContext(SignedInContext)
+
   const [isFaved, setIsFaved] = useState(false);
   
   const favorite = (event) => {
@@ -89,7 +91,7 @@ export default function ParkCard( { name, location, description, addToFaves, rem
         </CardContent>
         </CardActionArea>
         
-        <button onClick={(event) => favorite(event)}>{isFaved ? "❣️" : "♡"}</button>
+        {isSignedIn && <button onClick={(event) => favorite(event)}>{isFaved ? "❣️" : "♡"}</button>}
         
     </Card>
   );
