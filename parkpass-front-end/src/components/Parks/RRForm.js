@@ -119,8 +119,7 @@ export default function RRForm({ values, park }) {
              <br></br><br></br>
              <button type="submit" className={classes.button}>SUBMIT</button>
 
-              </div>
-        </Form> 
+        </form> 
    </div>
   )
 };
