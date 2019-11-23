@@ -18,11 +18,14 @@ const StyledRating = withStyles({
   },
 })(Rating);
 
-const RRForm = ({ values, park }) => {
-  const [value, setValue] = useState(0);
 
- /* Add Form */
+
+const RRForm = ({ values, event }) => {
+  const [value, setValue] = useState(0);
+ 
+  /* Add Form */
 console.log(values);
+
   return (
     <div className='Review'>
           <Form>            
@@ -72,17 +75,20 @@ console.log(values);
 };      
          
 const FormikReviewForm = withFormik({
-  mapPropsToValues({ park, rating, comment }) {
+  mapPropsToValues({ park, name, username, rating, comment }) {
     return {
       park_id: park.id || '',
+      name: name || '',
+      uername: username || '',
+      rating: rating || '{}',
       comment: comment || ''
     };
   },
   handleSubmit(values, tools) {
     axiosWithAuth()
-      .post(`https://park-passport.herokuapp.com/api/parks/ratings/test`, values)          
+      .post(`https://park-passport.herokuapp.com/api/parks/:id/ratings`, values)          
       .then(res => {
-      console.log("fired", res);
+        console.log("fired", res);
       })
       .catch(err => console.log(err));
        tools.resetForm();
