@@ -28,6 +28,7 @@ console.log(values);
 
   return (
     <div className='Review'>
+ 
           <Form>            
              <Field 
                 type='hidden'
@@ -57,6 +58,7 @@ console.log(values);
               icon={<FavoriteIcon fontSize="inherit" />}
               onChange={(event, newValue) => {
                 setValue(newValue);
+                
               }}
              />
              <br></br>
@@ -80,7 +82,7 @@ const FormikReviewForm = withFormik({
       park_id: park.id || '',
       name: name || '',
       uername: username || '',
-      rating: rating || '{}',
+      rating: rating || '',
       comment: comment || ''
     };
   },
@@ -92,6 +94,7 @@ const FormikReviewForm = withFormik({
       })
       .catch(err => console.log(err));
        tools.resetForm();
+       
     } 
   })(RRForm);
   console.log(FormikReviewForm);
