@@ -11,15 +11,17 @@ import { withStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
 import { SignedInContext } from '../../contexts/SignedInContext';
 import { Link } from 'react-router-dom';
-
+import '../../index.css'
 
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345,
-    margin: "20px auto",
+    margin: "40px auto",
     boxShadow: "0 8px 40px -15px rgba(0,0,0,0.3)",
     "borderRadius": "5px",
-    "textDecoration": "none"
+    "textDecoration": "none",
+    border: "1px solid gray",
+    backgroundColor: "#fefcfa"
     },
   details: {
     marginTop: "10px",
@@ -28,6 +30,21 @@ const useStyles = makeStyles(theme => ({
   box: {
     marginTop: "20px",
     marginBottom: "-10px"
+  },
+  parkName: {
+    fontFamily: "Raleway"
+  },
+  parkDetails: {
+    fontFamily: "Merriweather"
+  },
+  button: {
+    border: "none",
+    width: "100%",
+    padding: "10px 0",
+    borderTop: "1px solid lightgray",
+    backgroundColor: "#77F7CC",
+    fontFamily: "Merriweather"
+
   }
 }));
 
@@ -66,31 +83,32 @@ export default function ParkCard( { name, location, description, addToFaves, rem
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+        <CardContent >
+          <Typography className={classes.parkName} gutterBottom variant="h5" component="h2">
             {name}
           </Typography>
           <Divider variant="middle" />
           <div className={classes.details}>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Location: {location}
+          <Typography className={classes.parkDetails} variant="body2" color="textSecondary" component="p">
+            State: <strong>{location} </strong>
             <br></br>
-            Description: {description}
+            Description: <strong>{description}</strong>
           </Typography>
           </div>
           <Box className={classes.box} component="fieldset" mb={3} borderColor="transparent">
-          <Typography component="legend">Excellent</Typography>
+          <Typography component="legend" className={classes.parkDetails}>Excellent</Typography>
           <StyledRating
           name="customized-color"
           value={5}
           icon={<FavoriteIcon fontSize="inherit" />}
           />
           </Box>
+         
         </CardContent>
+        
         </CardActionArea>
         
-        <button onClick={(event) => favorite(event)}>{isFaved ? "❣️" : "♡"}</button>
-        
+        <button className={classes.button} onClick={(event) => favorite(event)}>{isFaved ? "☑️" : "⬛"} Add to your Favorite's List</button>
     </Card>
   );
 }

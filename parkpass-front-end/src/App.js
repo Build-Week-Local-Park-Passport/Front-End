@@ -21,8 +21,16 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   title: {
-    fontFamily: "Merriweather"
-  }  
+    fontFamily: "Merriweather",
+    color: "black"
+  },
+  subtitle: {
+    width: "330px",
+    margin: "0 auto",
+    fontSize: "14px",
+    fontFamily: "Merriweather",
+    paddingBottom: "10px"
+  }
 });
 
 function App() {
@@ -58,6 +66,7 @@ function App() {
         <div className="App">
           <Nav />
           <h1 className={classes.title}>ParkPass App</h1>
+          <h3 className={classes.subtitle}>No matter where you are, <br></br>there's always a park nearby.</h3>
 
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={Signup} />       

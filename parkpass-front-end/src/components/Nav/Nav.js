@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     padding: "10px 0",
     display: "flex",
     justifyContent: "space-around",
-    borderBottom: "1px solid lightgray",
+    borderBottom: "1px solid black",
     backgroundColor: "green",
     alignItems: "center"
   },
