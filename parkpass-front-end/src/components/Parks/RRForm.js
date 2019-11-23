@@ -4,8 +4,26 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import Rating from '@material-ui/lab/Rating';
 import { withStyles } from '@material-ui/core/styles';
 import { axiosWithAuth } from '../../utils/api';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 /* Set slices of state for form */
+
+const useStyles = makeStyles({
+  textField: {
+    "border": "1px solid lightgray",
+    padding: "10px 10px",
+    borderRadius: "5px"
+  },
+  button: {
+    "border": "none",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    boxShadow: "1px 10px 5px -6px rgba(194,194,194,1)"
+  }
+});
 
 const StyledRating = withStyles({
   iconFilled: {
@@ -18,33 +36,23 @@ const StyledRating = withStyles({
 
 const RRForm = ({ values, park }) => {
   const [value, setValue] = useState(0);
+  const classes = useStyles();
 
  /* Add Form */
 console.log(values);
   return (
     <div className='Review'>
-          <Form>            
-             <Field 
-                type='hidden'
-                id='park_id'
-                name='park_id'
-                placeholder=''
-                value={values.park_id}
-              />  
-               {/* <Field 
-                type='text'
-                id='rating'
-                name='rating'
-                placeholder='Rating'
-                value={values.rating}
-              />         */}
-               <Field 
+          <Form>
+            <div>
+              <Field 
                 type='text'
                 id='comment'
                 name='comment'
-                placeholder='Comment'
+                placeholder="Leave a Comment"
                 value={values.comment}
-              /><br></br>   
+                className={classes.textField}
+              />
+              <br></br><br></br>   
 
              <StyledRating
               name="simple-controlled"
@@ -54,8 +62,10 @@ console.log(values);
                 setValue(newValue);
               }}
              />
-             <br></br>
-          <button type="submit">Submit</button>
+             <br></br><br></br>
+             <button type="submit" className={classes.button}>SUBMIT</button>
+
+              </div>
         </Form> 
    </div>
   );
@@ -65,7 +75,8 @@ const FormikReviewForm = withFormik({
   mapPropsToValues({ park, rating, comment }) {
     return {
       park_id: park.id || '',
-      comment: comment || ''
+      comment: comment || '',
+      rating: rating || ''
     };
   },
   handleSubmit(values, tools) {

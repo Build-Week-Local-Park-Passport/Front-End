@@ -11,3 +11,13 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+@font-face {
+  font-family: 'Merriweather';
+  src: local('Merriweather'), url(./fonts/Merriweather-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Raleway';
+src: local('Raleway'), url(./fonts/Raleway-Regular.ttf) format('truetype');
+}

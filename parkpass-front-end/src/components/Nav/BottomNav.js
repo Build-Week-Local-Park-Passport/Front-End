@@ -136,5 +136,4 @@ const BottomNav = (props) => {
     </div>
   );
 }
-
 export default BottomNav;
