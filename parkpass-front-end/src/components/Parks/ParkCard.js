@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import Card from '@material-ui/core/Card'
+import React, { useState, useContext } from 'react';
+import Card from '@material-ui/core/Card';
 import { makeStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,6 +9,8 @@ import Box from '@material-ui/core/Box';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import { withStyles } from '@material-ui/core/styles';
 import Rating from '@material-ui/lab/Rating';
+import { SignedInContext } from '../../contexts/SignedInContext';
+import { Link } from 'react-router-dom';
 
 
 const useStyles = makeStyles(theme => ({
@@ -39,9 +41,11 @@ const StyledRating = withStyles({
 })(Rating);
 
 
-export default function ParkCard( { name, location, description, addToFaves } ) {
+export default function ParkCard( { name, location, description, addToFaves, removeFromFaves } ) {
+
   const classes = useStyles();
-  const [value, setValue] = useState();
+
+  const [isFaved, setIsFaved] = useState(false);
   
   const favorite = (event) => {
     event.preventDefault()
@@ -51,7 +55,12 @@ export default function ParkCard( { name, location, description, addToFaves } ) 
       location: location,
       description: description
     }
-    addToFaves(park)
+    setIsFaved(!isFaved)
+    if(!isFaved) {
+      addToFaves(park)
+    } else {
+      removeFromFaves(park)
+    }
   }
 
   return (
@@ -79,7 +88,9 @@ export default function ParkCard( { name, location, description, addToFaves } ) 
           </Box>
         </CardContent>
         </CardActionArea>
-        <button onClick={(event) => favorite(event)}>Add To Faves</button>
+        
+        <button onClick={(event) => favorite(event)}>{isFaved ? "❣️" : "♡"}</button>
+        
     </Card>
   );
 }

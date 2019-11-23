@@ -102,14 +102,14 @@ useEffect(() => {
 
         {data.map((park => {
         return (
-        <Link className={classes.Link} to={`parks/${park.id}`}>
+        <Link key={park.id} className={classes.Link} to={`parks/${park.id}`}>
         <ParkCard 
-        key={park.id} 
-        name={park.name} 
-        description={park.description} 
-        location={park.location} 
-        review={park.review}
-        addToFaves={props.addToFaves}
+          name={park.name} 
+          description={park.description} 
+          location={park.location} 
+          review={park.review}
+          addToFaves={props.addToFaves}
+          removeFromFaves={props.removeFromFaves}
           />
         </Link>        
         )})
