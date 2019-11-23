@@ -1,10 +1,10 @@
 import React from 'react'
-import FormikReviewForm from './RRForm';
+import RRForm from './RRForm';
 
 export default function RatePark(props) {
   return (
     <div>
-        <FormikReviewForm park={props.park}></FormikReviewForm>
+        <RRForm park={props.park} />
         {props.review && props.review.map(reviews => (
             <div key={reviews.park_id}>
                 <p>{reviews.rating}</p>
