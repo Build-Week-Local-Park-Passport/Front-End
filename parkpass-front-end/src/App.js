@@ -29,7 +29,8 @@ const useStyles = makeStyles({
     margin: "0 auto",
     fontSize: "14px",
     fontFamily: "Merriweather",
-    paddingBottom: "10px"
+    paddingBottom: "10px",
+    color: "gray"
   }
 });
 

@@ -21,15 +21,15 @@ const useStyles = makeStyles(theme => ({
     "borderRadius": "5px",
     "textDecoration": "none",
     border: "1px solid gray",
-    backgroundColor: "#fefcfa"
+    backgroundColor: "#fffffa"
     },
   details: {
     marginTop: "10px",
     textAlign: "left"
   },
   box: {
-    marginTop: "20px",
-    marginBottom: "-10px"
+    marginBottom: "0px",
+    marginLeft: "-15px",
   },
   parkName: {
     fontFamily: "Raleway"
@@ -41,9 +41,11 @@ const useStyles = makeStyles(theme => ({
     border: "none",
     width: "100%",
     padding: "10px 0",
-    borderTop: "1px solid lightgray",
-    backgroundColor: "#77F7CC",
-    fontFamily: "Merriweather"
+    borderTop: "1px solid gray",
+    backgroundColor: "#fdd5b1",
+    fontFamily: "Merriweather",
+    color: "black",
+    height: "50px"
 
   }
 }));
@@ -85,30 +87,31 @@ export default function ParkCard( { name, location, description, addToFaves, rem
       <CardActionArea>
         <CardContent >
           <Typography className={classes.parkName} gutterBottom variant="h5" component="h2">
-            {name}
+            <strong>{name}</strong>
           </Typography>
           <Divider variant="middle" />
           <div className={classes.details}>
-          <Typography className={classes.parkDetails} variant="body2" color="textSecondary" component="p">
-            State: <strong>{location} </strong>
-            <br></br>
-            Description: <strong>{description}</strong>
-          </Typography>
-          </div>
           <Box className={classes.box} component="fieldset" mb={3} borderColor="transparent">
-          <Typography component="legend" className={classes.parkDetails}>Excellent</Typography>
           <StyledRating
           name="customized-color"
           value={5}
           icon={<FavoriteIcon fontSize="inherit" />}
           />
           </Box>
+          <Typography className={classes.parkDetails} variant="body2" color="textSecondary" component="p">
+            State: <strong>{location} </strong>
+            <br></br>
+            <br></br>
+            <strong>{description}</strong>
+          </Typography>
+          </div>
+          
          
         </CardContent>
         
         </CardActionArea>
         
-        <button className={classes.button} onClick={(event) => favorite(event)}>{isFaved ? "☑️" : "⬛"} Add to your Favorite's List</button>
+        <button className={classes.button} onClick={(event) => favorite(event)}>{isFaved ? "☑️ Added!" : "⬛ Add to your Favorite's List"} </button>
     </Card>
   );
 }

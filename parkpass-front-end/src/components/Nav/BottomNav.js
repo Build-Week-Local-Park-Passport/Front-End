@@ -29,7 +29,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: "20px"
   },
   button: {
-    margintop: "20px"
+    margintop: "20px",
+    backgroundColor: "orange"
   },
   dialog: {
     maxWidth: 345,
@@ -37,6 +38,7 @@ const useStyles = makeStyles(theme => ({
     },
     fab: {
       margin: theme.spacing(1),
+      backgroundColor: "green"
     }
 }));
 

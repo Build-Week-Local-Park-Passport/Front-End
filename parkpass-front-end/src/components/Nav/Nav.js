@@ -32,8 +32,8 @@ const useStyles = makeStyles({
     "border": "none",
     padding: "10px 20px",
     borderRadius: "5px",
-    backgroundColor: "#3F51B5",
-    color: "White",
+    backgroundColor: "orange",
+    color: "black",
     fontFamily: "Raleway",
     fontSize: "16px"
   }
@@ -60,7 +60,7 @@ export default function Nav() {
         {signedIn && <Link to="/account" className={classes.link}>Account</Link>}
 
 
-        {signedIn && <button className={classes.button} onClick={e => signout(e)}>Logout</button>}
+        {signedIn && <button className={classes.button} onClick={e => signout(e)}><strong>Logout</strong></button>}
 
       </nav>
     </div>

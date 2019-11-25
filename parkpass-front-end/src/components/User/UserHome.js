@@ -1,12 +1,37 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  card: {
+    alignItems: "center"
+  },
+  title: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  name: {
+    textTransform: "uppercase"
+  },
+  list: {
+    border: "1px solid black",
+    backgroundColor: "green",
+    alignItems: "center"
+  }
+});
+
 
 export default function UserHome({ faves, remove }) {
-  const username = localStorage.getItem('username')
+  const username = localStorage.getItem('username');
+  const classes = useStyles();
+
 
   return (
+  <div>
+    <div className={classes.list}>
+      <h2>{username}'s Favorites</h2>
+      </div>
+
     <div>
-      <p>{username}</p>
-      <h1>My Favorites</h1>
       {faves && faves.map((fav, index) => {
         console.log(fav)
         return (
@@ -15,8 +40,9 @@ export default function UserHome({ faves, remove }) {
             <p>{fav.description}</p>
             <button onClick={() => remove(fav)}>Remove</button>
           </div>
-        )
+              )
       })}
     </div>
+  </div>
   )
-}
+};
